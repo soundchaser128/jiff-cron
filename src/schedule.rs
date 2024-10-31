@@ -841,16 +841,6 @@ mod test {
 
     #[test]
     fn test_no_panic_on_nonexistent_time_after() {
-        //use chrono::offset::TimeZone;
-        //use chrono_tz::Tz;
-
-        //let schedule_tz: Tz = "Europe/London".parse().unwrap();
-        //let dt = schedule_tz
-        //    .ymd(2019, 10, 27)
-        //    .and_hms(0, 3, 29)
-        //    .checked_add_signed(chrono::Duration::hours(1)) // puts it in the middle of the DST transition
-        //    .unwrap();
-
         let schedule_tz: TimeZone = TimeZone::get("Europe/London").unwrap();
         let dt = DateTime::new(2019, 10, 27, 0, 3, 29, 0)
             .unwrap()
