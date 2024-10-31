@@ -1,6 +1,6 @@
 [package]
 name = "jiff-cron"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
     "Max Countryman <hello@maxcountryman.com>",
     "Zack Slayton <zack.slayton@gmail.com>",
