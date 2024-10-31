@@ -109,7 +109,6 @@ mod tests {
             .at(14, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2017, 6, 15).and_hms(14, 29, 36);
         let mut events = schedule.after(&starting_date);
         assert_eq!(
             date(2018, 1, 1)
@@ -142,7 +141,6 @@ mod tests {
             .at(14, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2017, 10, 15).and_hms(14, 29, 36);
         let mut events = schedule.after(&starting_date);
         assert_eq!(
             date(2017, 11, 1)
@@ -175,7 +173,6 @@ mod tests {
             .at(14, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2016, 12, 23).and_hms(14, 29, 36);
         let mut events = schedule.after(&starting_date);
         assert_eq!(
             date(2016, 12, 25)
@@ -208,7 +205,6 @@ mod tests {
             .at(14, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2016, 12, 29).and_hms(14, 29, 36);
         let mut events = schedule.after(&starting_date);
         assert_eq!(
             date(2016, 12, 24)
@@ -241,7 +237,6 @@ mod tests {
             .at(22, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2017, 2, 25).and_hms(22, 29, 36);
         let mut events = schedule.after(&starting_date);
         assert_eq!(
             date(2017, 2, 25)
@@ -274,7 +269,6 @@ mod tests {
             .at(14, 29, 36, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
-        //let starting_date = Utc.ymd(2017, 6, 15).and_hms(14, 29, 36);
         let mut events = schedule.after(&starting_date);
 
         assert_eq!(
@@ -431,17 +425,11 @@ mod tests {
     #[test]
     fn test_first_ordinals_not_in_set_1() {
         let schedule = "0 0/10 * * * * *".parse::<Schedule>().unwrap();
-        //let start_time_1 = NaiveDate::from_ymd(2017, 10, 24).and_hms(0, 0, 59);
-        //let start_time_1 = Utc.from_utc_datetime(&start_time_1);
-
         let start_time_1 = date(2017, 10, 24)
             .at(0, 0, 59, 0)
             .to_zoned(TimeZone::UTC)
             .unwrap();
         let next_time_1 = schedule.after(&start_time_1).next().unwrap();
-
-        //let start_time_2 = NaiveDate::from_ymd(2017, 10, 24).and_hms(0, 1, 0);
-        //let start_time_2 = Utc.from_utc_datetime(&start_time_2);
 
         let start_time_2 = date(2017, 10, 24)
             .at(0, 1, 0, 0)
@@ -454,9 +442,6 @@ mod tests {
     #[test]
     fn test_first_ordinals_not_in_set_2() {
         let schedule_1 = "00 00 23 * * * *".parse::<Schedule>().unwrap();
-        //let start_time = NaiveDate::from_ymd(2018, 11, 15).and_hms(22, 30, 00);
-        //let start_time = Utc.from_utc_datetime(&start_time);
-
         let start_time = date(2018, 11, 15)
             .at(22, 30, 0, 0)
             .to_zoned(TimeZone::UTC)
@@ -472,7 +457,6 @@ mod tests {
     fn test_period_values_any_dom() {
         let schedule = Schedule::from_str("0 0 0 ? * *").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 9, 17).and_hms(0, 0, 0);
         let dt = date(2020, 9, 17)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
@@ -492,7 +476,6 @@ mod tests {
     fn test_period_values_any_dow() {
         let schedule = Schedule::from_str("0 0 0 * * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 9, 17).and_hms(0, 0, 0);
         let dt = date(2020, 9, 17)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
@@ -512,7 +495,6 @@ mod tests {
     fn test_period_values_all_seconds() {
         let schedule = Schedule::from_str("*/17 * * * * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
@@ -520,12 +502,6 @@ mod tests {
 
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 17),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 34),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 51),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 1, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 1, 17),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 1, 34),
             date(2020, 1, 1)
                 .at(0, 0, 17, 0)
                 .to_zoned(schedule_tz.clone())
@@ -560,17 +536,12 @@ mod tests {
     fn test_period_values_range() {
         let schedule = Schedule::from_str("0 0 0 1 1-4/2 ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 3, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2021, 1, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2021, 3, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2022, 1, 1).and_hms(0, 0, 0),
             date(2020, 3, 1)
                 .at(0, 0, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -597,17 +568,12 @@ mod tests {
     fn test_period_values_range_hours() {
         let schedule = Schedule::from_str("0 0 10-12/2 * * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 1, 1).and_hms(10, 0, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(12, 0, 0),
-            //schedule_tz.ymd(2020, 1, 2).and_hms(10, 0, 0),
-            //schedule_tz.ymd(2020, 1, 2).and_hms(12, 0, 0),
             date(2020, 1, 1)
                 .at(10, 0, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -634,20 +600,12 @@ mod tests {
     fn test_period_values_range_days() {
         let schedule = Schedule::from_str("0 0 0 1-31/10 * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 1, 11).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 1, 21).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 1, 31).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 2, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 2, 11).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 2, 21).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 3, 1).and_hms(0, 0, 0),
             date(2020, 1, 11)
                 .at(0, 0, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -686,19 +644,12 @@ mod tests {
     fn test_period_values_range_months() {
         let schedule = Schedule::from_str("0 0 0 1 January-June/1 *").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 2, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 3, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 4, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 5, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2020, 6, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2021, 1, 1).and_hms(0, 0, 0),
             date(2020, 2, 1)
                 .at(0, 0, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -733,7 +684,6 @@ mod tests {
     fn test_period_values_range_years() {
         let schedule = Schedule::from_str("0 0 0 1 1 ? 2020-2040/10").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
@@ -758,21 +708,12 @@ mod tests {
     fn test_period_values_point() {
         let schedule = Schedule::from_str("0 */21 * * * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 21, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(0, 42, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(1, 0, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(1, 21, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(1, 42, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(2, 0, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(2, 21, 0),
-            //schedule_tz.ymd(2020, 1, 1).and_hms(2, 42, 0),
             date(2020, 1, 1)
                 .at(0, 21, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -815,17 +756,12 @@ mod tests {
     fn test_period_values_named_range() {
         let schedule = Schedule::from_str("0 0 0 1 January-April/2 ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let dt = schedule_tz.ymd(2020, 1, 1).and_hms(0, 0, 0);
         let dt = date(2020, 1, 1)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
         let mut schedule_iter = schedule.after(&dt);
         let expected_values = vec![
-            //schedule_tz.ymd(2020, 3, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2021, 1, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2021, 3, 1).and_hms(0, 0, 0),
-            //schedule_tz.ymd(2022, 1, 1).and_hms(0, 0, 0),
             date(2020, 3, 1)
                 .at(0, 0, 0, 0)
                 .to_zoned(schedule_tz.clone())
@@ -864,12 +800,10 @@ mod tests {
     fn test_includes() {
         let schedule = Schedule::from_str("0 0 0 2-31/10 * ?").unwrap();
         let schedule_tz = TimeZone::get("Europe/London").unwrap();
-        //let included = schedule_tz.ymd(2020, 1, 12).and_hms(0, 0, 0);
         let included = date(2020, 1, 12)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
             .unwrap();
-        //let not_included = schedule_tz.ymd(2020, 1, 11).and_hms(0, 0, 0);
         let not_included = date(2020, 1, 11)
             .at(0, 0, 0, 0)
             .to_zoned(schedule_tz.clone())
