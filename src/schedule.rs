@@ -348,7 +348,7 @@ impl Display for Schedule {
 
 impl PartialEq for Schedule {
     fn eq(&self, other: &Schedule) -> bool {
-        self.source == other.source
+        self.timeunitspec_eq(other)
     }
 }
 
@@ -881,12 +881,32 @@ mod test {
 
     #[test]
     fn test_time_unit_spec_equality() {
+        // Every week
         let schedule_1 = Schedule::from_str("@weekly").unwrap();
         let schedule_2 = Schedule::from_str("0 0 0 * * 1 *").unwrap();
+
+        // Every day
         let schedule_3 = Schedule::from_str("0 0 0 * * 1-7 *").unwrap();
         let schedule_4 = Schedule::from_str("0 0 0 * * * *").unwrap();
-        assert_ne!(schedule_1, schedule_2);
+        let schedule_5 = Schedule::from_str("0  0  0  *  *  *  *").unwrap();
+
+        // Every second of every day's first minute
+        let schedule_6 = Schedule::from_str("* 0 0 * * * *").unwrap();
+
+        // Schedules defined as "@weekly" and "0 0 0 * * 1 *"
+        // yield the same events and are therefore considered equal.
+        assert_eq!(schedule_1, schedule_2);
         assert!(schedule_1.timeunitspec_eq(&schedule_2));
+
+        // Schedules defined as "0 0 0 * * 1-7 *" and "0 0 0 * * * *"
+        // yield the same events and are therefore considered equal.
+        assert_eq!(schedule_3, schedule_4);
         assert!(schedule_3.timeunitspec_eq(&schedule_4));
+
+        // Whitespace in the source string is irrelevant to equality.
+        assert!(schedule_4.timeunitspec_eq(&schedule_5));
+
+        // But schedules yielding different events are not equal.
+        assert_ne!(schedule_4, schedule_6);
     }
 }
