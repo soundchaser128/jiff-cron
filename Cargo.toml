@@ -15,9 +15,9 @@ license = "MIT OR Apache-2.0"
 edition = "2021"
 
 [dependencies]
-jiff = "0.1"
+jiff = "0.2"
 nom = "7"
-serde = {version = "1", optional = true }
+serde = { version = "1", optional = true }
 
 [dev-dependencies]
 serde_test = "1"
